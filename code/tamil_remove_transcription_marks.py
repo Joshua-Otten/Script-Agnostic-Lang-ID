@@ -16,3 +16,5 @@ The subscripts/superscripts are introduced to differentiate the four sounds.
 These are 5 such sequences. Unicode uses superscripts instead of subscript 
 
 """ 
+
+import os

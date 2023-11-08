@@ -18,3 +18,33 @@ These are 5 such sequences. Unicode uses superscripts instead of subscript
 """ 
 
 import os
+import re
+
+def filter_store(list_of_items):
+    if ".DS_Store" in list_of_items:
+        list_of_items.remove(".DS_Store")
+    return list_of_items
+
+def cleanup(filepath):
+    print(filepath)
+    
+    with open(filepath, "r") as f:
+        data = [line.replace("²","").replace("³","").replace("⁴","").strip() for line in f.readlines()]
+
+    with open(filepath, "w") as f:
+        for x in data:
+            f.write(x + "\n")
+    
+if __name__ == "__main__":
+    PATH = "../TransliteratedData/"
+    for directory in filter_store(os.listdir(PATH)):
+        DIRPATH = f"{PATH}{directory}/"
+        files = filter_store(os.listdir(DIRPATH))  
+        expression = ".*_Taml.*"
+        for file in files:
+            search = re.search(expression, file)
+            if search is not None:
+                cleanup(f"{DIRPATH}{file}")
+            
+                
+                

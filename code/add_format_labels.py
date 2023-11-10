@@ -1,4 +1,4 @@
-# This program takes a given a label as input, and creates formated labelled files according to fastText classification expectations
+# This program takes a given a language and folders as input, and creates formatted labelled files according to fastText classification expectations
 # Note that since the goal is script-agnosticism, the label should be the document's language, and not its script.
 # arguments: [directory path (including '/')] [new path] [label]
 import sys

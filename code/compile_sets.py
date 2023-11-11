@@ -1,7 +1,7 @@
 # this compiles baseline training data
 import random
 
-# training data set
+# training set data
 
 # reading in the data
 train_set = open('../labelled_data/baseline.train','w')

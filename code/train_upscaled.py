@@ -1,6 +1,7 @@
 import fasttext
 
 model = fasttext.train_supervised(input="../labelled_data/Upscaled/Upscale.train")
+<<<<<<< HEAD
 model.save_model("../upscaled_model.bin")
 print('complete dataset:')
 print(model.test("../labelled_data/Upscaled/Upscale.test"))
@@ -21,4 +22,8 @@ print(model.test("../labelled_data/Upscaled/Upscale.test"))
 model = fasttext.train_supervised(input="../labelled_data/Upscaled/Percent_75/Upscaled75.train")
 model.save_model("../upscaled_model75.bin")
 print('75% of the training data:')
+=======
+model.save_model("../models/upscaled_model.bin")
+
+>>>>>>> 093ee4753a3717dadea0bebedd5ff8fe30dd0368
 print(model.test("../labelled_data/Upscaled/Upscale.test"))

@@ -1,18 +1,17 @@
-f = open('../labelled_data/UDHR/udhr-lid.csv','r')
-lines = f.readlines()
-f.close()
-n = open('../labelled_data/UDHR/udhr.test','w')
+from datasets import load_dataset
 
-supported_langs = ['tel','tam','mal','kan']
-count = 0
-for line in lines:
-    example = line.split(',')
-    sentence = example[1]
-    lang_id = example[2]
-    if lang_id in supported_langs:
-        n.write('__label__'+lang_id+' '+sentence+'\n')
-        count += 1
-        
+n = open('../labelled_data/UDHR/udhr2.test','w')
+
+dataset = load_dataset('cis-lmu/udhr-lid',split='test')
+count = {}
+count['tel'] = 0
+count['mal'] = 0
+count['tam'] = 0
+count['kan'] = 0
+for x in dataset:
+    if x['iso639-3'] in count.keys():
+        count[x['iso639-3']] += 1
+        n.write('__label__'+x['iso639-3']+' '+x['sentence']+'\n')
 print(count)
 n.close()
-    
+

@@ -1,0 +1,7 @@
+.DS_Store
+code/.DS_Store
+labelled_data/.DS_Store
+models/.DS_Store
+TransliteratedData/.DS_Store
+venv
+.vscode

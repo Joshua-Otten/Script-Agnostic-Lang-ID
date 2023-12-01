@@ -43,6 +43,21 @@ def flattenresults():
         accuracy(data, model_base, "baseline")
         accuracy(data, model, f"flatten-{script}")
  
+    
+def avg_accuracy(data, model):
+    correct = 0
+    total = 0
+    for line in data:
+        label = line[0]
+        sentence = line[1]
+        prediction = model.predict(sentence.strip("\n"))[0][0]
+        if prediction == label:
+            correct += 1
+        total += 1
+    print(100*correct/total)
+    print()
+    
+    
 def noiseresults():
     print("\nResults for Noise Experiment")
     results = {}
@@ -53,7 +68,7 @@ def noiseresults():
     results['n100'] = []
     results['all'] = []
     results['upscale'] = []
-    
+
     modelbase =  fasttext.load_model(f"../models/baseline_model.bin")
     modelupscale = fasttext.load_model(f"../models/upscaled_model.bin")
     n25 = fasttext.load_model(f"../models/noisy_model_25.bin")
@@ -90,16 +105,81 @@ def noiseresults():
     for key in results.keys():
         print(f"{key}: {sum(results[key])/len(results[key]):.2f}", end = "\t")
     print("\n")
+    
 # Generate Results for Table 2: Flatten
 flattenresults()
 
 # Generate Results for Table 4: Noise
 noiseresults()
 
-model = fasttext.load_model("../models/upscaled_model.bin")
-with open("../labelled_data/Upscaled/upscale.test", "r") as f:
-    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
-print("Accuracy for 'all' scripts")
-accuracy(data, model)
+# for script in ["Taml", "Knda", "Mlym", "Telu"]:
+#     model = fasttext.load_model(f"../models/flatten_model_{script}.bin")
+#     with open(f"../labelled_data/Flatten/flatten_all_{script}.devtest", "r") as f:
+#         data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+#     print(f"Flatten Accuracy for Script = {script}")
+#     accuracy(data, model)
 
-   
+########## Upscale Testing ##############
+print("Upscale Ablation Testing")
+# 25 percent
+model = fasttext.load_model("../models/upscaled_model25.bin")
+with open("../labelled_data/noiseless.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+accuracy(data, model, "upscale-25%-noiseless")
+with open("../labelled_data/Upscaled/Upscale.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+accuracy(data, model, "upscale-25%-complete")
+
+# 50%
+model = fasttext.load_model("../models/upscaled_model50.bin")
+with open("../labelled_data/noiseless.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+accuracy(data, model, "upscale-50%-noiseless)
+with open("../labelled_data/Upscaled/Upscale.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+accuracy(data, model, "upscale-50%-complete)
+
+# 75%
+model = fasttext.load_model("../models/upscaled_model75.bin")
+with open("../labelled_data/noiseless.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+accuracy(data, model, "upscale-75%-noiseless)
+with open("../labelled_data/Upscaled/Upscale.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+accuracy(data, model, "upscale-75%-complete)
+
+# 100%
+model = fasttext.load_model("../models/upscaled_model.bin")
+with open("../labelled_data/noiseless.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+accuracy(data, model, "upscale-100%-noiseless)
+with open("../labelled_data/Upscaled/Upscale.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+accuracy(data, model, "upscale-100%-complete)
+
+model = fasttext.load_model("../models/noisy_model_all.bin")
+with open("../labelled_data/noiseless.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+accuracy(data, model, "noisy-model-all-noiseless)
+
+########## Testing Models on UDHR ##############
+print("Testing Models on UDHR")
+model = fasttext.load_model("../models/baseline_model.bin")
+with open("../labelled_data/UDHR/udhr.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+avg_accuracy(data, model, "baseline(flores)")
+
+model = fasttext.load_model("../models/upscaled_model.bin")
+with open("../labelled_data/UDHR/udhr.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+avg_accuracy(data, model, "upscaled")
+
+model = fasttext.load_model("../models/flatten_model_Telu.bin")
+with open("../labelled_data/UDHR/udhr.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+avg_accuracy(data, model, "flatten (telu)")
+
+model = fasttext.load_model("../models/noisy_model_all.bin")
+with open("../labelled_data/UDHR/udhr.test", "r") as f:
+    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
+avg_accuracy(data, model, "noise(all)")

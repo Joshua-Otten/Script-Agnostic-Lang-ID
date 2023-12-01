@@ -134,33 +134,33 @@ accuracy(data, model, "upscale-25%-complete")
 model = fasttext.load_model("../models/upscaled_model50.bin")
 with open("../labelled_data/noiseless.test", "r") as f:
     data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
-accuracy(data, model, "upscale-50%-noiseless)
+accuracy(data, model, "upscale-50%-noiseless")
 with open("../labelled_data/Upscaled/Upscale.test", "r") as f:
     data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
-accuracy(data, model, "upscale-50%-complete)
+accuracy(data, model, "upscale-50%-complete")
 
 # 75%
 model = fasttext.load_model("../models/upscaled_model75.bin")
 with open("../labelled_data/noiseless.test", "r") as f:
     data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
-accuracy(data, model, "upscale-75%-noiseless)
+accuracy(data, model, "upscale-75%-noiseless")
 with open("../labelled_data/Upscaled/Upscale.test", "r") as f:
     data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
-accuracy(data, model, "upscale-75%-complete)
+accuracy(data, model, "upscale-75%-complete")
 
 # 100%
 model = fasttext.load_model("../models/upscaled_model.bin")
 with open("../labelled_data/noiseless.test", "r") as f:
     data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
-accuracy(data, model, "upscale-100%-noiseless)
+accuracy(data, model, "upscale-100%-noiseless")
 with open("../labelled_data/Upscaled/Upscale.test", "r") as f:
     data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
-accuracy(data, model, "upscale-100%-complete)
+accuracy(data, model, "upscale-100%-complete")
 
 model = fasttext.load_model("../models/noisy_model_all.bin")
 with open("../labelled_data/noiseless.test", "r") as f:
     data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
-accuracy(data, model, "noisy-model-all-noiseless)
+accuracy(data, model, "noisy-model-all-noiseless")
 
 ########## Testing Models on UDHR ##############
 print("Testing Models on UDHR")

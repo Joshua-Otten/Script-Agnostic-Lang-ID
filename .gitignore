@@ -1,0 +1,9 @@
+code/.DS_Store
+labelled_data/.DS_Store
+labelled_data/Glot500/.DS_Store
+models/.DS_Store
+TransliteratedData/.DS_Store
+figures/.DS_Store
+venv
+code/venv
+.vscode

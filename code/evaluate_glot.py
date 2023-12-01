@@ -3,7 +3,6 @@ from datasets import load_dataset
 from huggingface_hub import hf_hub_download
 
 fasttext.FastText.eprint = lambda x: None
-
 dataset = load_dataset('cis-lmu/GlotStoryBook')
 
 overall_data = []

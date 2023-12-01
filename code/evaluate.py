@@ -85,8 +85,7 @@ def noiseresults():
         results['n50'] += accuracy(data, n50, "n@50")
         results['n75'] += accuracy(data, n75, "n@75")
         results['n100'] += accuracy(data, n100, "n@100")
-        results['all'] += accuracy(data, nall, "n@all")
-            
+        results['all'] += accuracy(data, nall, "n@all")     
     print("\n")
     for key in results.keys():
         print(f"{key}: {sum(results[key])/len(results[key]):.2f}", end = "\t")

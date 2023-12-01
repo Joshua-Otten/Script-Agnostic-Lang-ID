@@ -5,4 +5,5 @@ models/.DS_Store
 TransliteratedData/.DS_Store
 figures/.DS_Store
 venv
+code/venv
 .vscode

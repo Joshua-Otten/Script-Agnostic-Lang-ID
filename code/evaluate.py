@@ -44,7 +44,7 @@ def flattenresults():
         accuracy(data, model, f"flatten-{script}")
  
     
-def avg_accuracy(data, model):
+def avg_accuracy(data, model, name=""):
     correct = 0
     total = 0
     for line in data:
@@ -54,7 +54,7 @@ def avg_accuracy(data, model):
         if prediction == label:
             correct += 1
         total += 1
-    print(100*correct/total)
+    print(name, 100*correct/total)
     print()
     
     

@@ -1,5 +1,6 @@
 import fasttext
 from huggingface_hub import hf_hub_download
+fasttext.FastText.eprint = lambda x: None
 
 # Predict in loop. Save the outputs. Compare to gold labels to produce scores (script-wise)
 def accuracy(data, model):
@@ -21,7 +22,7 @@ def accuracy(data, model):
             else:
                 correct[prediction] = 1
     for k in ["__label__tam", "__label__kan", "__label__mal", "__label__tel"]:
-        print(f"{correct[k]*100/total[k]:.2f}")
+        print(f"{k}: {correct[k]*100/total[k]:.2f}", end = " ")
     print()
     
 

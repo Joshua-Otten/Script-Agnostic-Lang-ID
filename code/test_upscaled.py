@@ -1,7 +1,8 @@
 import fasttext
+fasttext.FastText.eprint = lambda x: None
 
-baseline = fasttext.load_model('../baseline_model.bin')
-upscaled = fasttext.load_model('../upscaled_model.bin')
+baseline = fasttext.load_model('../models/baseline_model.bin')
+upscaled = fasttext.load_model('../models/upscaled_model.bin')
 
 # Baseline model
 print('Testing Baseline on noiseless data:')

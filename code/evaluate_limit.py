@@ -15,7 +15,7 @@ modelbase =  fasttext.load_model(f"../models/baseline_model.bin")
 modelupscale = fasttext.load_model(f"../models/upscaled_model.bin")
 nall = fasttext.load_model(f"../models/noisy_model_all.bin")
 flatten = fasttext.load_model(f"../models/flatten_model_Telu.bin")
-
+non_parallel = fasttext.load_model(f"../models/non-parallel_upscaled_model.bin")
 print("Overall Data Length (LIMIT): ", sum([len(x[0]) for x in overall_data]))
 
 results = {}
@@ -24,10 +24,11 @@ results['upscale'] = []
 results['flatten'] = []
 results['noise'] = []
 results['wiki'] = []
+results['nonparallel'] = []
 
 print("\nEvaluating all models on LIMIT")
 print("Model: Accuracy")
-for key in [('baseline', modelbase), ('upscale',modelupscale), ('flatten',flatten), ('noise',nall), ('wiki', fasttextwiki)]:
+for key in [('upscale',modelupscale)]:#[('baseline', modelbase), ('upscale',modelupscale), ('flatten',flatten), ('noise',nall), ('wiki', fasttextwiki),('nonparallel', non_parallel)]:
     for entry in overall_data:
         entry_data = entry[0]
         gold = entry[1]

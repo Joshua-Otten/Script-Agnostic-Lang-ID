@@ -4,7 +4,7 @@
 import sys
 
 scripts = ['Knda','Mlym','Taml','Telu']
-types = ['.dev','.devtest']
+types = types = ['.dev','.devtest'] #['_non-parallel.txt']
 path = sys.argv[1]
 new_path = sys.argv[2]
 language = sys.argv[3]

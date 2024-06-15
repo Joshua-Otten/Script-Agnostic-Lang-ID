@@ -11,11 +11,11 @@ for pair in [('mal', 'Mlym'), ('tam', 'Taml'),('tel', 'Telu')]: #('kan', 'Knda')
 
 model_path = hf_hub_download(repo_id="facebook/fasttext-language-identification", filename="model.bin")
 fasttextwiki = fasttext.load_model(model_path)
-modelbase =  fasttext.load_model(f"../models/baseline_model.bin")
-modelupscale = fasttext.load_model(f"../models/upscaled_model.bin")
-nall = fasttext.load_model(f"../models/noisy_model_all.bin")
-flatten = fasttext.load_model(f"../models/flatten_model_Telu.bin")
-non_parallel = fasttext.load_model(f"../models/non-parallel_upscaled_model.bin")
+modelbase =  fasttext.load_model("../models/baseline_model.bin")
+modelupscale = fasttext.load_model("../models/upscaled_model.bin")
+nall = fasttext.load_model("../models/noisy_model_all.bin")
+flatten = fasttext.load_model("../models/flatten_model_Telu.bin")
+modelseparate  = fasttext.load_model("../models/separate_model.bin")
 print("Overall Data Length (LIMIT): ", sum([len(x[0]) for x in overall_data]))
 
 results = {}
@@ -24,11 +24,11 @@ results['upscale'] = []
 results['flatten'] = []
 results['noise'] = []
 results['wiki'] = []
-results['nonparallel'] = []
+results['separate'] = []
 
 print("\nEvaluating all models on LIMIT")
 print("Model: Accuracy")
-for key in [('upscale',modelupscale)]:#[('baseline', modelbase), ('upscale',modelupscale), ('flatten',flatten), ('noise',nall), ('wiki', fasttextwiki),('nonparallel', non_parallel)]:
+for key in [('separate', modelseparate)]:#('baseline', modelbase), ('upscale',modelupscale), ('flatten',flatten), ('noise',nall), ('wiki', fasttextwiki)]:
     for entry in overall_data:
         entry_data = entry[0]
         gold = entry[1]
@@ -36,7 +36,7 @@ for key in [('upscale',modelupscale)]:#[('baseline', modelbase), ('upscale',mode
         acc = 0
         for x in entry_data: 
             pred = key[1].predict(x)[0][0]
-            if pred == gold or pred == gold2:
+            if pred == gold or pred == gold2 or gold in pred:
                 acc += 1
         acc = acc/len(entry_data)
         results[key[0]].append(acc)

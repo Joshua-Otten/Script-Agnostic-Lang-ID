@@ -121,7 +121,6 @@ noiseresults()
 
 ########## Upscale Testing ##############
 print("Upscale Ablation Testing")
-
 # 25 percent
 model = fasttext.load_model("../models/upscaled_model25.bin")
 with open("../labelled_data/noiseless.test", "r") as f:
@@ -163,7 +162,6 @@ with open("../labelled_data/noiseless.test", "r") as f:
     data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
 accuracy(data, model, "noisy-model-all-noiseless")
 
-
 ########## Testing Models on UDHR ##############
 print("Testing Models on UDHR")
 model = fasttext.load_model("../models/baseline_model.bin")
@@ -185,8 +183,3 @@ model = fasttext.load_model("../models/noisy_model_all.bin")
 with open("../labelled_data/UDHR/udhr.test", "r") as f:
     data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
 avg_accuracy(data, model, "noise(all)")
-
-model = fasttext.load_model("../models/non-parallel_upscaled_model.bin")
-with open("../labelled_data/UDHR/udhr.test", "r") as f:
-    data = [(x.split(" ")[0], " ".join(x.split(" ")[1:])) for x in f.readlines()]
-avg_accuracy(data, model, "non-parallel upscaled")

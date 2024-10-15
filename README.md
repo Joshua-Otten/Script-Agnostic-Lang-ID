@@ -21,7 +21,7 @@ We focus our proof-of-concept study on four major Dravidian languages (Tamil, Te
 
 # Poster
 This work was recently presented at SouthNLP 2024 at Emory University and MASC-SLL 2024 at Johns Hopkins University (Best Paper Award). The poster is also [available in the repository](poster.pdf) for a visual overview 
-
+<!--
 # Code
 This repository contains all the scripts we used to download, generate, preprocess, and evaluate the data and models. It is not organized in a  pipeline manner as each script has its function, but the functions are modularized as much as possible so you can reuse the relevant scripts for replicating certain experiments or for your own use.
 
@@ -37,3 +37,4 @@ We will add a link to the arXiv identifier below soon.
       primaryClass={cs.CL}
 }
 ```
+-->
